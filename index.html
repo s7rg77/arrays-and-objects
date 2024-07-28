@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>desarrollo web entorno cliente</title>
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            background-color: black;
+            color: #00FF00;
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+        h1,
+        h2 {
+            margin-left: 10px;
+            color: #FFFFFF;
+            font-weight: normal;
+        }
+
+        #head {
+            margin-top: 10px;
+            margin-right: 10px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .home,
+        .doc,
+        .git {
+            width: 100px;
+        }
+
+        p {
+            margin-left: 10px;
+        }
+
+        #buttons {
+            margin-right: 10px;
+            display: flex;
+        }
+
+        button {
+            margin-left: 10px;
+            padding: 5px;
+            border: 1px solid #006400;
+            background-color: #006400;
+            color: #00FF00;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #006400;
+            color: #00FF00;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <script>
+        // metodo para verificar si un valor es un numero entero
+        function esEntero(n) {
+            // variable para almacenar la entrada del usuario
+            let input;
+            // variable para almacenar el numero convertido
+            let num;
+            // solicita al usuario que ingrese un valor
+            input = prompt(n);
+            // verifica si el usuario cancela la operacion
+            if (input === null) {
+                alert("operación cancelada");
+                // retorna null si la operacion es cancelada
+                return null;
+            }
+            // reemplaza signos de puntuacion por puntos
+            input = input.replace(/[,']/g, ".");
+            // convierte la entrada en un numero de tipo float
+            num = parseFloat(input);
+            // verifica si el numero es un entero
+            if (isNaN(num)) {
+                alert(input + " no es un número");
+                // retorna al principio de la funcion
+                return esEntero(n);
+            } else {
+                if (num % 1 == 0) {
+                    // retorna el numero entero
+                    return num;
+                } else {
+                    alert(input + " no es entero");
+                    // retorna al principio de la funcion
+                    return esEntero(n);
+                }
+            }
+        }
+
+        // metodo para crear un array
+        function createArray() {
+            let N = esEntero("introduce tamaño del array (numero)");
+            // verifica si la operacion es cancelada
+            if (N === null) {
+                return;
+            }
+            // array para almacenar los numeros ingresados
+            let array = [];
+            // bucle para solicitar al usuario que ingrese numeros
+            for (let i = 0; i < N; i++) {
+                let num = esEntero("introduce número " + (i + 1) + ":");
+                // verifica si la operacion es cancelada
+                if (num === null) {
+                    return;
+                }
+                // agrega el numero al array
+                array.push(num);
+            }
+            // ordena el array
+            array.sort(function (a, b) {
+                return a - b;
+            });
+            // muestra el array en el elemento con el id result
+            document.getElementById("result").innerHTML = "array: " + array.join(", ");
+            // filtra y muestra los elementos pares
+            let pares = array.filter(function (num) {
+                return num % 2 === 0;
+            });
+            document.getElementById("pares").innerHTML = "pares: " + pares.join(", ");
+            // filtra y muestra los elementos impares
+            let impares = array.filter(function (num) {
+                return num % 2 !== 0;
+            });
+            document.getElementById("impares").innerHTML = "impares: " + impares.join(", ");
+        }
+
+        function Smartphone(marca, modelo, color, tamaño) {
+            // propiedades
+            this.marca = marca;
+            this.modelo = modelo;
+            this.color = color;
+            this.tamaño = tamaño;
+            // metodos
+            this.instalarAplicacion = function (apli) {
+                alert("aplicación " + apli + " instalada con éxito "
+                    + "en smartphone " + this.marca + " " + this.modelo) + ".";
+            };
+            this.enviarCorreo = function (mensa) {
+                alert("mensaje: " + mensa + " enviado con éxito.");
+            };
+            this.llamar = function (num) {
+                alert("llamando al " + num + "... desde mi "
+                    + "smartphone con tamaño " + this.tamaño + " pulgadas.");
+            };
+        }
+
+        // metodo prototipo para mostrar todas las propiedades
+        Smartphone.prototype.obtenerDatosSmartPhone = function () {
+            alert("datos del smartphone:\n" +
+                "marca: " + this.marca + "\n" +
+                "modelo: " + this.modelo + "\n" +
+                "color: " + this.color + "\n" +
+                "tamaño: " + this.tamaño + " pulgadas");
+        }
+
+        // creacion de un objeto de tipo Smartphone
+        var phone = new Smartphone("samsung", "galaxy s24", "negro", "6.6");
+        // invocacion de metodos
+        function instalarAplicacion() {
+            // solicita nombre app al usuario
+            var apli = prompt("ingrese nombre app:");
+            // verifica si el usuario cancela
+            if (apli !== null) {
+                // invoca al metodo instalarAplicacion del objeto phone
+                return phone.instalarAplicacion(apli);
+            }
+            else {
+                alert("cancelado");
+            }
+        }
+
+        function enviarCorreo() {
+            // solicita mensaje al usuario
+            var mensa = prompt("ingrese mensaje:");
+            // verifica si el usuario cancela
+            if (mensa !== null) {
+                // invoca al metodo enviarCorreo del objeto phone
+                return phone.enviarCorreo(mensa);
+            }
+            else {
+                alert("cancelado")
+            }
+        }
+
+        function llamar() {
+            // solicita numero al usuario
+            var num = prompt("ingrese número:");
+            // verifica si el usuario cancela
+            if (num !== null) {
+                // invoca al metodo llamar del objeto phone
+                return phone.llamar(num);
+            }
+            else {
+                alert("cancelado")
+            }
+        }
+
+        // funcion para mostrar los datos del smartphone
+        function mostrarDatos() {
+            phone.obtenerDatosSmartPhone();
+        }
+
+        function goHome() {
+
+            window.location.href = '/';
+
+        }
+
+        function goGit() {
+
+            window.location.href = 'https://github.com/s7rg77/arrays-and-objects';
+
+        }
+
+        function goDoc() {
+
+            window.location.href = '/doc';
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id="head">
+        <button class="doc" onclick="goDoc()">doc</button>
+        <button class="git" onclick="goGit()">git</button>
+        <button class="home" onclick="goHome()">back</button>
+    </div>
+    <h1>arrays and objects</h1>
+    <h2>sergio lópez</h2>
+    <div id="buttons">
+        <button onclick="createArray()">crear array</button>
+        <button onclick="instalarAplicacion()">instalar app</button>
+        <button onclick="enviarCorreo()">enviar correo</button>
+        <button onclick="llamar()">llamar</button>
+        <button onclick="mostrarDatos()">mostrar datos</button>
+    </div>
+    <p id="result"></p>
+    <p id="pares"></p>
+    <p id="impares"></p>
+</body>
+
+<footer>
+    <h3>desarrollo web entorno cliente</h3>
+</footer>
+
+</html>
