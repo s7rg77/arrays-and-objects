@@ -6,9 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>arrays and objects</title>
     <style>
+        html,
         body {
             margin: 0px;
             padding: 0px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body {
             background-color: black;
             color: #00FF00;
             font-family: monospace;
@@ -22,11 +29,15 @@
             font-weight: normal;
         }
 
-        #head {
+        header {
             margin-top: 10px;
             margin-right: 10px;
             display: flex;
             justify-content: flex-end;
+        }
+
+        main {
+            flex: 1;
         }
 
         .home,
@@ -54,12 +65,10 @@
         }
 
         footer {
-            bottom: 0px;
             width: 100%;
             background-color: #006400;
             color: #00FF00;
             text-align: center;
-            position: fixed;
         }
     </style>
     <script>
@@ -232,27 +241,30 @@
 </head>
 
 <body>
-    <div id="head">
+    <header>
         <button class="doc" onclick="goDoc()">doc</button>
         <button class="git" onclick="goGit()">git</button>
         <button class="home" onclick="goHome()">back</button>
-    </div>
-    <h1>arrays and objects</h1>
-    <h2>sergio lópez</h2>
-    <div id="buttons">
-        <button onclick="createArray()">crear array</button>
-        <button onclick="instalarAplicacion()">instalar app</button>
-        <button onclick="enviarCorreo()">enviar correo</button>
-        <button onclick="llamar()">llamar</button>
-        <button onclick="mostrarDatos()">mostrar datos</button>
-    </div>
-    <p id="result"></p>
-    <p id="pares"></p>
-    <p id="impares"></p>
-</body>
+    </header>
 
-<footer>
-    <h3>desarrollo web entorno cliente</h3>
-</footer>
+    <main>
+        <h1>arrays and objects</h1>
+        <h2>sergio lópez</h2>
+        <div id="buttons">
+            <button onclick="createArray()">crear array</button>
+            <button onclick="instalarAplicacion()">instalar app</button>
+            <button onclick="enviarCorreo()">enviar correo</button>
+            <button onclick="llamar()">llamar</button>
+            <button onclick="mostrarDatos()">mostrar datos</button>
+        </div>
+        <p id="result"></p>
+        <p id="pares"></p>
+        <p id="impares"></p>
+    </main>
+
+    <footer>
+        <h3>desarrollo web entorno cliente</h3>
+    </footer>
+</body>
 
 </html>
